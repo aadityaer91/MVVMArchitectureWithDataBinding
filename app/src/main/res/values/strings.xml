@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">UNA</string>
+    <string name="homepage_label">Homepage</string>
+    <string name="internal_server_error">Something went wrong</string>
+    <string name="login_mobile_number_hint">Mobile Number*</string>
+    <string name="login_password_hint">Password*</string>
+    <string name="submit">Submit</string>
+    <string name="login">Login</string>
+    <string name="login_mobile_number_error">Please enter valid mobile number</string>
+    <string name="login_password_error">Please enter valid password</string>
+</resources>
