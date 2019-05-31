@@ -86,6 +86,7 @@ public class LoginFragment extends BaseFragment {
                 return false;
             }
         });
+
     }
 
     @Override

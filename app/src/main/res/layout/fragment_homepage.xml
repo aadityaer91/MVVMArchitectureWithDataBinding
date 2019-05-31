@@ -1,12 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center_vertical"
+    android:gravity="center"
     android:orientation="vertical">
 
     <com.unaprime.app.android.una.views.customviews.CustomTextView
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/homepage_label" />
+        android:text="@string/homepage_label"
+        android:textColor="@color/colorAccent"
+        android:textSize="30dp" />
+
+    <com.unaprime.app.android.una.views.customviews.CustomTextView
+        android:id="@+id/tvSignOut"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="Sign Out"
+        android:textColor="@color/black"
+        android:textSize="30dp"
+        app:typeFaceType="thick" />
 </LinearLayout>

@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.unaprime.app.android.una.viewmodels.LoginOtpViewModel" />
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@+id/btnLogin"
+            android:padding="12dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_above="@+id/tilMobileNumber"
+                android:layout_alignParentTop="true"
+                android:gravity="center">
+
+                <ImageView
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    android:contentDescription="@string/image"
+                    android:src="@drawable/una_logo" />
+            </LinearLayout>
+
+
+            <com.unaprime.app.android.una.views.customviews.CustomTextInputLayout
+                android:id="@+id/tilMobileNumber"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_above="@+id/tvMobileNumberError">
+
+                <com.unaprime.app.android.una.views.customviews.CustomTextInputEditText
+                    android:id="@+id/etMobileNumber"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/login_mobile_number_hint"
+                    android:inputType="textNoSuggestions|number"
+                    android:maxLength="10"
+                    android:textColor="@color/black"
+                    android:textSize="18dp" />
+            </com.unaprime.app.android.una.views.customviews.CustomTextInputLayout>
+
+            <com.unaprime.app.android.una.views.customviews.CustomTextView
+                android:id="@+id/tvMobileNumberError"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_above="@+id/tilOtp"
+                android:layout_marginBottom="15dp"
+                android:text="@{viewModel.mobileNumberError}"
+                android:textColor="@color/darkRed" />
+
+            <com.unaprime.app.android.una.views.customviews.CustomTextInputLayout
+                android:id="@+id/tilOtp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_above="@+id/tvOtpError"
+                android:visibility="gone">
+
+                <com.unaprime.app.android.una.views.customviews.CustomTextInputEditText
+                    android:id="@+id/etOtp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/login_enter_otp_hint"
+                    android:imeOptions="actionDone"
+                    android:inputType="textNoSuggestions|number"
+                    android:maxLength="10"
+                    android:textColor="@color/black"
+                    android:textSize="18dp" />
+            </com.unaprime.app.android.una.views.customviews.CustomTextInputLayout>
+
+            <com.unaprime.app.android.una.views.customviews.CustomTextView
+                android:id="@+id/tvOtpError"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_above="@+id/tvResentOtp"
+                android:text="@{viewModel.otpError}"
+                android:textColor="@color/darkRed" />
+
+            <com.unaprime.app.android.una.views.customviews.CustomTextView
+                android:id="@+id/tvResentOtp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_above="@+id/llMiddleText"
+                android:layout_alignParentEnd="true"
+                android:layout_marginLeft="5dp"
+                android:layout_marginBottom="30dp"
+                android:text="@string/login_resend_otp"
+                android:textColor="@color/colorAccent"
+                android:textSize="17dp"
+                app:typeFaceType="medium" />
+
+            <LinearLayout
+                android:id="@+id/llMiddleText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_above="@+id/llBottomTextPart1"
+                android:layout_marginBottom="25dp"
+                android:gravity="center_horizontal">
+
+                <com.unaprime.app.android.una.views.customviews.CustomTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/login_middle_text"
+                    android:textColor="@color/black"
+                    android:textSize="17dp"
+                    app:typeFaceType="medium" />
+
+                <com.unaprime.app.android.una.views.customviews.CustomTextView
+                    android:id="@+id/tvRegister"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:text="@string/login_register"
+                    android:textColor="@color/colorAccent"
+                    android:textSize="17dp"
+                    app:typeFaceType="thick" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/llBottomTextPart1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_above="@+id/llBottomTextPart2"
+                android:gravity="center_horizontal">
+
+                <com.unaprime.app.android.una.views.customviews.CustomTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/login_bottom_text_part1"
+                    android:textColor="@color/black"
+                    android:textSize="15dp" />
+
+                <com.unaprime.app.android.una.views.customviews.CustomTextView
+                    android:id="@+id/tvTermCond"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:text="@string/term_cond"
+                    android:textColor="@color/colorAccent"
+                    android:textSize="15dp" />
+
+                <com.unaprime.app.android.una.views.customviews.CustomTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="&amp;"
+                    android:textColor="@color/black"
+                    android:textSize="15dp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/llBottomTextPart2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="15dp"
+                android:gravity="center_horizontal">
+
+                <com.unaprime.app.android.una.views.customviews.CustomTextView
+                    android:id="@+id/tvPrivacyPol"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="5dp"
+                    android:text="@string/privacy_policy"
+                    android:textColor="@color/colorAccent"
+                    android:textSize="15dp" />
+
+                <com.unaprime.app.android.una.views.customviews.CustomTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/login_bottom_text_part2"
+                    android:textColor="@color/black"
+                    android:textSize="15dp" />
+
+
+            </LinearLayout>
+        </RelativeLayout>
+
+        <com.unaprime.app.android.una.views.customviews.CustomButton
+            android:id="@+id/btnLogin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:background="@color/colorAccent"
+            android:padding="12dp"
+            android:text="@{viewModel.otpGenerated}"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="17dp"
+            app:typeFaceType="medium" />
+    </RelativeLayout>
+
+</layout>

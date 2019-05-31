@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 
 import com.unaprime.app.android.una.App;
@@ -218,11 +219,18 @@ public class SplashViewModel implements RetrofitApiCallback {
     }
 
     public void loadFirstFragment() {
-        if (AppUtils.isValidString(App.mAppSession.getUserId())) {
-            EventBus.getDefault().post(new UISwitchEvent(UISwitchEvent.EventType.HomePageFragmentLoad));
-        } else {
-            EventBus.getDefault().post(new UISwitchEvent(UISwitchEvent.EventType.LoginFragmentLoad));
-        }
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                if (AppUtils.isValidString(App.mAppSession.getUserId())) {
+                    EventBus.getDefault().post(new UISwitchEvent(UISwitchEvent.EventType.HomePageFragmentLoad));
+                } else {
+                    EventBus.getDefault().post(new UISwitchEvent(UISwitchEvent.EventType.LoginFragmentLoad));
+                }
+            }
+        }, 2000);
+
     }
 
     @Override

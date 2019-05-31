@@ -9,6 +9,7 @@ import com.unaprime.app.android.una.interfaces.RetrofitApiCallback;
 import com.unaprime.app.android.una.logger.AppLogger;
 import com.unaprime.app.android.una.services.WebserviceConstants;
 import com.unaprime.app.android.una.services.responses.ConfigResponseData;
+import com.unaprime.app.android.una.services.responses.NoDataResponseData;
 import com.unaprime.app.android.una.services.responses.HomepageResponseData;
 import com.unaprime.app.android.una.services.responses.LoginResponseData;
 import com.unaprime.app.android.una.services.retro.API;
@@ -53,6 +54,10 @@ public class AppContentProvider {
                 break;
 
             case VerifyLoginData:
+                fetchOnline = false;
+                break;
+
+            case GenerateLoginOtp:
                 fetchOnline = false;
                 break;
 
@@ -126,7 +131,17 @@ public class AppContentProvider {
             AppRetrofitCallback<ResponseBody> appRetrofitCallback = webDataProvider.provideRetrofitCallbackObject(callback, WebserviceConstants.APICallbackIdentifiers.VerifyLoginData, LoginResponseData.class);
             restClientAPIObject.doLogin(RestClient.secureAPIRequest(addCommonRequestData(requestArgs))).enqueue(appRetrofitCallback);
         } else {
-            webDataProvider.loadDataFromMock("login_response.json", callback, LoginResponseData.class, WebserviceConstants.APICallbackIdentifiers.FetchConfig);
+            webDataProvider.loadDataFromMock("login_response.json", callback, LoginResponseData.class, WebserviceConstants.APICallbackIdentifiers.VerifyLoginData);
+        }
+    }
+
+    public void generateOtpForLogin(JSONObject requestArgs, RetrofitApiCallback callback) {
+        if (shouldFetchFromOnline(WebserviceConstants.APICallbackIdentifiers.GenerateLoginOtp)) {
+            API restClientAPIObject = RestClient.getRetrofitBuilder("", WebserviceConstants.APIBaseIdentifiers.Secured);
+            AppRetrofitCallback<ResponseBody> appRetrofitCallback = webDataProvider.provideRetrofitCallbackObject(callback, WebserviceConstants.APICallbackIdentifiers.GenerateLoginOtp, NoDataResponseData.class);
+            restClientAPIObject.generateLoginOtp(RestClient.secureAPIRequest(addCommonRequestData(requestArgs))).enqueue(appRetrofitCallback);
+        } else {
+            webDataProvider.loadDataFromMock("base_response.json", callback, NoDataResponseData.class, WebserviceConstants.APICallbackIdentifiers.GenerateLoginOtp);
         }
     }
 }

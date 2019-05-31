@@ -22,6 +22,7 @@ import com.unaprime.app.android.una.views.dialogs.SpinkitProgressDialog;
 import com.unaprime.app.android.una.views.fragments.BaseFragment;
 import com.unaprime.app.android.una.views.fragments.HomepageFragment;
 import com.unaprime.app.android.una.views.fragments.LoginFragment;
+import com.unaprime.app.android.una.views.fragments.LoginUsingOtpFragment;
 import com.unaprime.app.android.una.views.fragments.SplashFragment;
 
 import org.greenrobot.eventbus.EventBus;
@@ -80,7 +81,8 @@ public class MainActivity extends AppCompatActivity {
                 break;
 
             case LoginFragmentLoad:
-                switchFragment(LoginFragment.newInstance(), false);
+                //switchFragment(LoginFragment.newInstance(), false);
+                switchFragment(LoginUsingOtpFragment.newInstance(), false);
                 break;
 
             case HomePageFragmentLoad:

@@ -28,5 +28,8 @@ public interface API {
     @POST("user/homepage")
     Call<ResponseBody> fetchHomepageData(@Body APIRequestData data);
 
+    @POST("user/generateOtp")
+    Call<ResponseBody> generateLoginOtp(@Body APIRequestData data);
+
 
 }

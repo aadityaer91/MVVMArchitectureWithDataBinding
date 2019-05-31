@@ -311,7 +311,11 @@ public class WebDataProvider {
         String mockJson = AppUtils.readMockJson(fileName);
         /*APIResponseData mockResponseData = new APIResponseData();
         mockResponseData.setData(new JsonObject(mockJson));*/
-        performJsonToChildPojoConversion(mockJson, callback, dataConverterClass, serviceName);
+
+        //performJsonToChildPojoConversion(mockJson, callback, dataConverterClass, serviceName);
+
+        AppLogger.log(TAG, "Mock Json from file:: " + mockJson);
+        performJsonToRootPojoConversion(mockJson, dataConverterClass, callback, serviceName);
     }
 }
 

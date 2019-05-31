@@ -7,7 +7,7 @@ import com.unaprime.app.android.una.R;
 import com.unaprime.app.android.una.utils.AppUtils;
 
 public class LoginValidator {
-    Context context;
+    public Context context;
 
     public LoginValidator(Context context) {
         this.context = context;
@@ -29,4 +29,13 @@ public class LoginValidator {
     private boolean validPassword(String password) {
         return AppUtils.isValidString(password) && password.length() >= 6;
     }
+
+    public String validateOtp(String otp) {
+        return validOtp(otp) ? null : context.getString(R.string.login_otp_error);
+    }
+
+    private boolean validOtp(String otp) {
+        return AppUtils.isValidString(otp) && otp.length() >= 6;
+    }
+
 }

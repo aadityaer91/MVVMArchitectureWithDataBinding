@@ -12,6 +12,7 @@ import android.telephony.TelephonyManager;
 import com.unaprime.app.android.una.events.UISwitchEvent;
 import com.unaprime.app.android.una.logger.AppLogger;
 import com.unaprime.app.android.una.providers.AppContentProvider;
+import com.unaprime.app.android.una.services.responses.LoginResponseData;
 import com.unaprime.app.android.una.utils.AppConstants;
 import com.unaprime.app.android.una.utils.AppUtils;
 import com.unaprime.app.android.una.views.fragments.BaseFragment;
@@ -149,6 +150,12 @@ public class AppSession {
     @Nullable
     public String getDestinationType() {
         return destinationType;
+    }
+
+    public void saveUserDataOnLogin(LoginResponseData loginResponseData) {
+        preferenceEditor.putString(AppConstants.USER_ID, loginResponseData.getUserId());
+        preferenceEditor.putString(AppConstants.USER_PUBLIC_KEY, loginResponseData.getApiSecurityKey());
+        preferenceEditor.commit();
     }
 
 

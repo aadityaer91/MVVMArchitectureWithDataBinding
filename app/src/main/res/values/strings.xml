@@ -8,4 +8,15 @@
     <string name="login">Login</string>
     <string name="login_mobile_number_error">Please enter valid mobile number</string>
     <string name="login_password_error">Please enter valid password</string>
+    <string name="login_otp_error">Please enter a valid otp</string>
+    <string name="login_generate_otp">Generate OTP</string>
+    <string name="login_bottom_text_part1">By logging in, you agree to the</string>
+    <string name="login_bottom_text_part2"> of UNAPrime Technologies Private Limited</string>
+    <string name="term_cond"><![CDATA[Terms & Conditions]]></string>
+    <string name="privacy_policy">Privacy Policy</string>
+    <string name="login_middle_text">Do not have Account?</string>
+    <string name="login_register">Register</string>
+    <string name="login_resend_otp">Resend OTP</string>
+    <string name="login_enter_otp_hint">Enter OTP*</string>
+    <string name="image">image</string>
 </resources>

@@ -1,4 +1,8 @@
 {
-  "userId": 1,
-  "apiSecurityKey": "1234"
+  "status": 1,
+  "message": "Login Success",
+  "data": {
+    "userId": 1,
+    "apiSecurityKey": "1234"
+  }
 }

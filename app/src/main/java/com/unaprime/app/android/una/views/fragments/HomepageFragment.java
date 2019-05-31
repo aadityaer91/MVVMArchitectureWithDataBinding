@@ -3,7 +3,6 @@ package com.unaprime.app.android.una.views.fragments;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.app.FragmentActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,7 +12,13 @@ import com.unaprime.app.android.una.AppSession;
 import com.unaprime.app.android.una.MainActivity;
 import com.unaprime.app.android.una.R;
 
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+import butterknife.Unbinder;
+
 public class HomepageFragment extends BaseFragment {
+
+    Unbinder unbinder;
 
     public static HomepageFragment newInstance() {
 
@@ -27,7 +32,9 @@ public class HomepageFragment extends BaseFragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return super.onCreateView(inflater, container, savedInstanceState);
+        View view = inflater.inflate(R.layout.fragment_homepage, container, false);
+        unbinder = ButterKnife.bind(this, view);
+        return view;
     }
 
     @Override
@@ -59,5 +66,16 @@ public class HomepageFragment extends BaseFragment {
             }
             mainActivity.switchFragment(fragmentToLoad, true);
         }
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        unbinder.unbind();
+    }
+
+    @OnClick(R.id.tvSignOut)
+    public void onViewClicked() {
+        App.getAppSession().performSignOut();
     }
 }

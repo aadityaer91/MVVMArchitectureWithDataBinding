@@ -1,6 +1,10 @@
 {
-  "appUpdateStatus": 0,
-  "appUpdateMessage": "Please update your app to latest version of UNA app to proceed",
-  "appMaintenanceStatus": 0,
-  "appMaintenanceMessage": "Due to some technical issue, App is not available for use, currently"
+  "status": 1,
+  "message": "Config fetched successfully",
+  "data": {
+    "appUpdateStatus": 0,
+    "appUpdateMessage": "Please update your app to latest version of UNA app to proceed",
+    "appMaintenanceStatus": 0,
+    "appMaintenanceMessage": "Due to some technical issue, App is not available for use, currently"
+  }
 }

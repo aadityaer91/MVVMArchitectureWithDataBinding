@@ -19,7 +19,8 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:adjustViewBounds="true"
-            android:src="@mipmap/ic_launcher" />
+            android:src="@drawable/splashimagepng"
+            android:scaleType="fitXY"/>
 
     </RelativeLayout>
 </layout>
