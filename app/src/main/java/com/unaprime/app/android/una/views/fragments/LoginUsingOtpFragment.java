@@ -18,6 +18,7 @@ import com.unaprime.app.android.una.BuildConfig;
 import com.unaprime.app.android.una.R;
 import com.unaprime.app.android.una.databinding.FragmentLoginOtpBinding;
 import com.unaprime.app.android.una.events.UISwitchEvent;
+import com.unaprime.app.android.una.interfaces.UniqueFragmentNaming;
 import com.unaprime.app.android.una.logger.AppLogger;
 import com.unaprime.app.android.una.services.responses.CommonResponseData;
 import com.unaprime.app.android.una.services.responses.LoginResponseData;
@@ -43,7 +44,7 @@ import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 
-public class LoginUsingOtpFragment extends BaseFragment {
+public class LoginUsingOtpFragment extends BaseFragment implements UniqueFragmentNaming {
 
     private final String TAG = LoginUsingOtpFragment.class.getSimpleName();
     LoginOtpViewModel loginOtpViewModel;

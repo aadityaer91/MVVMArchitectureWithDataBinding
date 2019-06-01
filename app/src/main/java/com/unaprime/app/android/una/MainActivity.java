@@ -21,7 +21,6 @@ import com.unaprime.app.android.una.utils.AppUtils;
 import com.unaprime.app.android.una.views.dialogs.SpinkitProgressDialog;
 import com.unaprime.app.android.una.views.fragments.BaseFragment;
 import com.unaprime.app.android.una.views.fragments.HomepageFragment;
-import com.unaprime.app.android.una.views.fragments.LoginFragment;
 import com.unaprime.app.android.una.views.fragments.LoginUsingOtpFragment;
 import com.unaprime.app.android.una.views.fragments.SplashFragment;
 
@@ -213,7 +212,7 @@ public class MainActivity extends AppCompatActivity {
         BaseFragment tempCurrentTopFragment = currentTopFragment();
         if (tempCurrentTopFragment != null && (tempCurrentTopFragment instanceof HomepageFragment)) {
             fragmentTransaction.replace(R.id.mainFragmentContainer, fragment, fragmentClassName);
-        } else if (fragment instanceof SplashFragment || fragment instanceof HomepageFragment || fragment instanceof LoginFragment) {
+        } else if (fragment instanceof SplashFragment || fragment instanceof HomepageFragment || fragment instanceof LoginUsingOtpFragment) {
             fragmentTransaction.replace(R.id.mainFragmentContainer, fragment, fragmentClassName);
         } else {
             fragmentTransaction.add(R.id.mainFragmentContainer, fragment, fragmentClassName);
