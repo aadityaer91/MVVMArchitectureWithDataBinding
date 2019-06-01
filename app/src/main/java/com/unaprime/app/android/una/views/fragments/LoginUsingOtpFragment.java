@@ -14,6 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.unaprime.app.android.una.App;
+import com.unaprime.app.android.una.BuildConfig;
 import com.unaprime.app.android.una.R;
 import com.unaprime.app.android.una.databinding.FragmentLoginOtpBinding;
 import com.unaprime.app.android.una.events.UISwitchEvent;
@@ -75,6 +76,8 @@ public class LoginUsingOtpFragment extends BaseFragment {
     LinearLayout llBottomTextPart2;
     @BindView(R.id.btnLogin)
     CustomButton btnLogin;
+    @BindView(R.id.tvVersionInfo)
+    CustomTextView tvVersionInfo;
 
     public static LoginUsingOtpFragment newInstance() {
 
@@ -99,6 +102,7 @@ public class LoginUsingOtpFragment extends BaseFragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        tvVersionInfo.setText("App Version: " + BuildConfig.VERSION_NAME + " / " + BuildConfig.VERSION_CODE);
         /*etOtp.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             public boolean onEditorAction(TextView v, int actionId,
                                           KeyEvent event) {

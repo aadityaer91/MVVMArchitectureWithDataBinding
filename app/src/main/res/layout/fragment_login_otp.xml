@@ -22,11 +22,20 @@
             android:layout_above="@+id/btnLogin"
             android:padding="12dp">
 
+            <com.unaprime.app.android.una.views.customviews.CustomTextView
+                android:id="@+id/tvVersionInfo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:gravity="right"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="15dp" />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_above="@+id/tilMobileNumber"
-                android:layout_alignParentTop="true"
+                android:layout_below="@+id/tvVersionInfo"
                 android:gravity="center">
 
                 <ImageView
