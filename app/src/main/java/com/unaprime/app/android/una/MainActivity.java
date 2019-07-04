@@ -22,12 +22,15 @@ import com.unaprime.app.android.una.views.dialogs.SpinkitProgressDialog;
 import com.unaprime.app.android.una.views.fragments.BaseFragment;
 import com.unaprime.app.android.una.views.fragments.HomepageFragment;
 import com.unaprime.app.android.una.views.fragments.LoginUsingOtpFragment;
+import com.unaprime.app.android.una.views.fragments.RegisterFormFragment;
+import com.unaprime.app.android.una.views.fragments.RegisterUsingOtpFragment;
 import com.unaprime.app.android.una.views.fragments.SplashFragment;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
+import static com.unaprime.app.android.una.events.UISwitchEvent.EventType.RegisterFormFragmentLoad;
 import static com.unaprime.app.android.una.events.UISwitchEvent.EventType.SplashFragmentLoad;
 
 public class MainActivity extends AppCompatActivity {
@@ -86,6 +89,13 @@ public class MainActivity extends AppCompatActivity {
 
             case HomePageFragmentLoad:
                 switchFragment(HomepageFragment.newInstance(), false);
+                break;
+            case RegisterOtpFragmentLoad:
+                switchFragment(RegisterUsingOtpFragment.newInstance(), true);
+                break;
+
+            case RegisterFormFragmentLoad:
+                switchFragment(RegisterFormFragment.newInstance(bundleArgs), true);
                 break;
 
             default:

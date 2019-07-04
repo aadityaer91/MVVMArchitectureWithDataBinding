@@ -31,5 +31,9 @@ public interface API {
     @POST("user/generateOtp")
     Call<ResponseBody> generateLoginOtp(@Body APIRequestData data);
 
+    @POST("user/generateOtp")
+    Call<ResponseBody> generateRegisterOtp(@Body APIRequestData data);
 
+    @POST("user/registerOtp")
+    Call<ResponseBody> verifyOtpForRegistration(@Body APIRequestData data);
 }

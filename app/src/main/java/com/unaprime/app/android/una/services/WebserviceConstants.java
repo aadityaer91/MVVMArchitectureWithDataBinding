@@ -12,7 +12,10 @@ public class WebserviceConstants {
         NoSync,
         FetchConfig,
         VerifyLoginData,
-        GenerateLoginOtp, FetchHomepageData
+        GenerateLoginOtp,
+        FetchHomepageData,
+        GenerateRegisterOtp,
+        VerifyRegisterOtp,
     }
 
     public static String getBaseUrlApp() {

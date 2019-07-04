@@ -19,4 +19,8 @@
     <string name="login_resend_otp">Resend OTP</string>
     <string name="login_enter_otp_hint">Enter OTP*</string>
     <string name="image">image</string>
+    <string name="register_otp_text1">Enter your Mobile number\nwe will send OTP on this number</string>
+    <string name="register_otp_text2">Enter OTP and\nclick on \"Next\" button</string>
+    <string name="register_generate_otp">Generate OTP</string>
+    <string name="register_next">Next</string>
 </resources>

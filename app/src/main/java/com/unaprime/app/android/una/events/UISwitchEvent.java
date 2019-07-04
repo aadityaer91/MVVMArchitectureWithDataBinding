@@ -15,6 +15,8 @@ public class UISwitchEvent extends BaseEvent {
         SplashFragmentLoad,
         LoginFragmentLoad,
         HomePageFragmentLoad,
+        RegisterOtpFragmentLoad,
+        RegisterFormFragmentLoad,
 
     }
 

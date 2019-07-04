@@ -9,23 +9,22 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.unaprime.app.android.una.App;
-import com.unaprime.app.android.una.BuildConfig;
 import com.unaprime.app.android.una.R;
-import com.unaprime.app.android.una.databinding.FragmentLoginOtpBinding;
+import com.unaprime.app.android.una.databinding.FragmentRegisterOtpBinding;
 import com.unaprime.app.android.una.events.UISwitchEvent;
-import com.unaprime.app.android.una.interfaces.UniqueFragmentNaming;
 import com.unaprime.app.android.una.logger.AppLogger;
 import com.unaprime.app.android.una.services.responses.CommonResponseData;
 import com.unaprime.app.android.una.services.responses.LoginResponseData;
 import com.unaprime.app.android.una.services.responses.NoDataResponseData;
+import com.unaprime.app.android.una.services.responses.RegisterOtpResponseData;
 import com.unaprime.app.android.una.utils.AppConstants;
-import com.unaprime.app.android.una.validator.LoginValidator;
-import com.unaprime.app.android.una.viewmodels.LoginOtpViewModel;
+import com.unaprime.app.android.una.utils.AppUtils;
+import com.unaprime.app.android.una.validator.RegisterValidator;
+import com.unaprime.app.android.una.viewmodels.RegisterOtpViewModel;
 import com.unaprime.app.android.una.views.customviews.CustomButton;
 import com.unaprime.app.android.una.views.customviews.CustomTextInputEditText;
 import com.unaprime.app.android.una.views.customviews.CustomTextInputLayout;
@@ -44,11 +43,12 @@ import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 
-public class LoginUsingOtpFragment extends BaseFragment implements UniqueFragmentNaming {
+public class RegisterUsingOtpFragment extends BaseFragment {
 
-    private final String TAG = LoginUsingOtpFragment.class.getSimpleName();
-    LoginOtpViewModel loginOtpViewModel;
-    Unbinder unbinder;
+    private final String TAG = RegisterUsingOtpFragment.class.getSimpleName();
+    RegisterOtpViewModel registerOtpViewModel;
+    @BindView(R.id.tvMessage1)
+    CustomTextView tvMessage1;
     @BindView(R.id.etMobileNumber)
     CustomTextInputEditText etMobileNumber;
     @BindView(R.id.tilMobileNumber)
@@ -63,28 +63,15 @@ public class LoginUsingOtpFragment extends BaseFragment implements UniqueFragmen
     CustomTextView tvOtpError;
     @BindView(R.id.tvResentOtp)
     CustomTextView tvResentOtp;
-    @BindView(R.id.tvRegister)
-    CustomTextView tvRegister;
-    @BindView(R.id.llMiddleText)
-    LinearLayout llMiddleText;
-    @BindView(R.id.tvTermCond)
-    CustomTextView tvTermCond;
-    @BindView(R.id.llBottomTextPart1)
-    LinearLayout llBottomTextPart1;
-    @BindView(R.id.tvPrivacyPol)
-    CustomTextView tvPrivacyPol;
-    @BindView(R.id.llBottomTextPart2)
-    LinearLayout llBottomTextPart2;
-    @BindView(R.id.btnLogin)
-    CustomButton btnLogin;
-    @BindView(R.id.tvVersionInfo)
-    CustomTextView tvVersionInfo;
+    @BindView(R.id.btnRegister)
+    CustomButton btnRegister;
+    Unbinder unbinder;
 
-    public static LoginUsingOtpFragment newInstance() {
+    public static RegisterUsingOtpFragment newInstance() {
 
         Bundle args = new Bundle();
 
-        LoginUsingOtpFragment fragment = new LoginUsingOtpFragment();
+        RegisterUsingOtpFragment fragment = new RegisterUsingOtpFragment();
         fragment.setArguments(args);
         return fragment;
     }
@@ -92,36 +79,18 @@ public class LoginUsingOtpFragment extends BaseFragment implements UniqueFragmen
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        FragmentLoginOtpBinding binding = DataBindingUtil.inflate(inflater, R.layout.fragment_login_otp, container, false);
-        loginOtpViewModel = new LoginOtpViewModel(App.getAppSession().getAppContentProvider(), new LoginValidator(getContext()));
-        binding.setViewModel(loginOtpViewModel);
+        FragmentRegisterOtpBinding binding = DataBindingUtil.inflate(inflater, R.layout.fragment_register_otp, container, false);
+        registerOtpViewModel = new RegisterOtpViewModel(App.getAppSession().getAppContentProvider(), new RegisterValidator(getContext()));
+        binding.setViewModel(registerOtpViewModel);
         unbinder = ButterKnife.bind(this, binding.getRoot());
         return binding.getRoot();
-    }
-
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-
-        tvVersionInfo.setText("App Version: " + BuildConfig.VERSION_NAME + " / " + BuildConfig.VERSION_CODE);
-        /*etOtp.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            public boolean onEditorAction(TextView v, int actionId,
-                                          KeyEvent event) {
-
-                if (actionId == EditorInfo.IME_ACTION_DONE || event.getAction() == KeyEvent.ACTION_DOWN) {
-                    btnLogin.performClick();
-                    return true;
-                }
-                return false;
-            }
-        });*/
     }
 
     @OnEditorAction(R.id.etOtp)
     public boolean otpDoneAction(TextView v, int actionId,
                                  KeyEvent event) {
         if (actionId == EditorInfo.IME_ACTION_DONE || (event != null && event.getAction() == KeyEvent.ACTION_DOWN)) {
-            btnLogin.performClick();
+            btnRegister.performClick();
             return true;
         }
         return false;
@@ -131,7 +100,7 @@ public class LoginUsingOtpFragment extends BaseFragment implements UniqueFragmen
     public boolean mobileDoneAction(TextView v, int actionId,
                                     KeyEvent event) {
         if (actionId == EditorInfo.IME_ACTION_DONE || (event != null && event.getAction() == KeyEvent.ACTION_DOWN)) {
-            btnLogin.performClick();
+            btnRegister.performClick();
             return true;
         }
         return false;
@@ -139,7 +108,7 @@ public class LoginUsingOtpFragment extends BaseFragment implements UniqueFragmen
 
     @Override
     protected void bindViewModel() {
-        loginOtpViewModel.getUserData()
+        registerOtpViewModel.getUserData()
                 .takeUntil(stopEvent())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<CommonResponseData>() {
@@ -150,13 +119,16 @@ public class LoginUsingOtpFragment extends BaseFragment implements UniqueFragmen
 
                     @Override
                     public void onNext(CommonResponseData commonResponseData) {
-                        //update UI here
                         if (commonResponseData instanceof NoDataResponseData) {
                             tilOtp.setVisibility(View.VISIBLE);
                             etMobileNumber.setEnabled(false);
-                        } else if (commonResponseData instanceof LoginResponseData) {
-                            App.getAppSession().saveUserDataOnLogin((LoginResponseData) commonResponseData);
-                            EventBus.getDefault().post(new UISwitchEvent(UISwitchEvent.EventType.HomePageFragmentLoad));
+                        } else if (commonResponseData instanceof RegisterOtpResponseData) {
+                            RegisterOtpResponseData responseData = (RegisterOtpResponseData) commonResponseData;
+                            if (AppUtils.isValidString(responseData.getTempUserId())) {
+                                Bundle bundle = new Bundle();
+                                bundle.putString("tempUserId", responseData.getTempUserId());
+                                EventBus.getDefault().post(new UISwitchEvent(UISwitchEvent.EventType.RegisterFormFragmentLoad, bundle));
+                            }
                         } else {
                             AppLogger.log(TAG, "Don't know how to handle user data", AppConstants.LogLevel.WARNING);
                         }
@@ -173,7 +145,7 @@ public class LoginUsingOtpFragment extends BaseFragment implements UniqueFragmen
                     }
                 });
 
-        loginOtpViewModel.getLoginError()
+        registerOtpViewModel.getRegisterError()
                 .takeUntil(stopEvent())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<String>() {
@@ -197,7 +169,6 @@ public class LoginUsingOtpFragment extends BaseFragment implements UniqueFragmen
 
                     }
                 });
-
     }
 
     @Override
@@ -213,44 +184,37 @@ public class LoginUsingOtpFragment extends BaseFragment implements UniqueFragmen
         }
         switch (view.getId()) {
             case R.id.etMobileNumber:
-                loginOtpViewModel.mobileNumberChange(etMobileNumber.getText().toString());
+                registerOtpViewModel.mobileNumberChange(etMobileNumber.getText().toString());
                 break;
 
             case R.id.etOtp:
-                loginOtpViewModel.otpChange(etOtp.getText().toString());
+                registerOtpViewModel.otpChange(etOtp.getText().toString());
                 break;
         }
     }
 
     @OnTextChanged(R.id.etMobileNumber)
     public void mobileNumberChanged(CharSequence value) {
-        loginOtpViewModel.mobileNumberChange(value.toString());
+        registerOtpViewModel.mobileNumberChange(value.toString());
     }
 
     @OnTextChanged(R.id.etOtp)
     public void otpChanged(CharSequence value) {
-        loginOtpViewModel.otpChange(value.toString());
+        registerOtpViewModel.otpChange(value.toString());
     }
 
-    @OnClick({R.id.tvResentOtp, R.id.tvRegister, R.id.tvTermCond, R.id.tvPrivacyPol, R.id.btnLogin})
+    @OnClick({R.id.tvResentOtp, R.id.btnRegister})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.tvResentOtp:
-                loginOtpViewModel.verifyAndGenerateOtp();
+                registerOtpViewModel.verifyAndGenerateOtp();
                 break;
-            case R.id.tvRegister:
-                EventBus.getDefault().post(new UISwitchEvent(UISwitchEvent.EventType.RegisterOtpFragmentLoad));
-                break;
-            case R.id.tvTermCond:
-                break;
-            case R.id.tvPrivacyPol:
-                break;
-            case R.id.btnLogin:
-                if (btnLogin.getText().toString().equalsIgnoreCase(getString(R.string.login_generate_otp))) {
-                    loginOtpViewModel.verifyAndGenerateOtp();
-                } else if (btnLogin.getText().toString().equalsIgnoreCase(getString(R.string.login))) {
-                    if (loginOtpViewModel.formValidationStatus()) {
-                        loginOtpViewModel.verifyLoginOtp();
+            case R.id.btnRegister:
+                if (btnRegister.getText().toString().equalsIgnoreCase(getString(R.string.register_generate_otp))) {
+                    registerOtpViewModel.verifyAndGenerateOtp();
+                } else if (btnRegister.getText().toString().equalsIgnoreCase(getString(R.string.register_next))) {
+                    if (registerOtpViewModel.formValidationStatus()) {
+                        registerOtpViewModel.verifyRegisterOtp();
                     }
                 }
                 break;

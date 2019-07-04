@@ -12,6 +12,7 @@ import com.unaprime.app.android.una.services.responses.ConfigResponseData;
 import com.unaprime.app.android.una.services.responses.NoDataResponseData;
 import com.unaprime.app.android.una.services.responses.HomepageResponseData;
 import com.unaprime.app.android.una.services.responses.LoginResponseData;
+import com.unaprime.app.android.una.services.responses.RegisterOtpResponseData;
 import com.unaprime.app.android.una.services.retro.API;
 import com.unaprime.app.android.una.services.retro.AppRetrofitCallback;
 import com.unaprime.app.android.una.services.retro.RestClient;
@@ -58,6 +59,12 @@ public class AppContentProvider {
                 break;
 
             case GenerateLoginOtp:
+                fetchOnline = false;
+                break;
+            case GenerateRegisterOtp:
+                fetchOnline = false;
+                break;
+            case VerifyRegisterOtp:
                 fetchOnline = false;
                 break;
 
@@ -142,6 +149,26 @@ public class AppContentProvider {
             restClientAPIObject.generateLoginOtp(RestClient.secureAPIRequest(addCommonRequestData(requestArgs))).enqueue(appRetrofitCallback);
         } else {
             webDataProvider.loadDataFromMock("base_response.json", callback, NoDataResponseData.class, WebserviceConstants.APICallbackIdentifiers.GenerateLoginOtp);
+        }
+    }
+
+    public void generateOtpForRegister(JSONObject requestArgs, RetrofitApiCallback callback) {
+        if (shouldFetchFromOnline(WebserviceConstants.APICallbackIdentifiers.GenerateRegisterOtp)) {
+            API restClientAPIObject = RestClient.getRetrofitBuilder("", WebserviceConstants.APIBaseIdentifiers.Secured);
+            AppRetrofitCallback<ResponseBody> appRetrofitCallback = webDataProvider.provideRetrofitCallbackObject(callback, WebserviceConstants.APICallbackIdentifiers.GenerateRegisterOtp, NoDataResponseData.class);
+            restClientAPIObject.generateRegisterOtp(RestClient.secureAPIRequest(addCommonRequestData(requestArgs))).enqueue(appRetrofitCallback);
+        } else {
+            webDataProvider.loadDataFromMock("base_response.json", callback, NoDataResponseData.class, WebserviceConstants.APICallbackIdentifiers.GenerateRegisterOtp);
+        }
+    }
+
+    public void verifyRegisterOtp(JSONObject requestArgs, RetrofitApiCallback callback) {
+        if (shouldFetchFromOnline(WebserviceConstants.APICallbackIdentifiers.VerifyRegisterOtp)) {
+            API restClientAPIObject = RestClient.getRetrofitBuilder("", WebserviceConstants.APIBaseIdentifiers.Secured);
+            AppRetrofitCallback<ResponseBody> appRetrofitCallback = webDataProvider.provideRetrofitCallbackObject(callback, WebserviceConstants.APICallbackIdentifiers.VerifyRegisterOtp, RegisterOtpResponseData.class);
+            restClientAPIObject.verifyOtpForRegistration(RestClient.secureAPIRequest(addCommonRequestData(requestArgs))).enqueue(appRetrofitCallback);
+        } else {
+            webDataProvider.loadDataFromMock("register_otp_verify_response.json", callback, RegisterOtpResponseData.class, WebserviceConstants.APICallbackIdentifiers.VerifyRegisterOtp);
         }
     }
 }
